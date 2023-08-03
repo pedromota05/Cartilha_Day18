@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
-
+/* Importação da Fonte */
 * {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -11,6 +11,11 @@ body {
     overflow: visible !important;
 }
 
+hr {
+    display: none;
+}
+
+/* Estilo Navbar */
 .navbar {
     height: 80px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
@@ -18,10 +23,6 @@ body {
 
 .offcanvas.offcanvas-start {
     width: 83vw !important;
-}
-
-hr {
-    display: none;
 }
 
 .nav-item .nav-link {
@@ -83,7 +84,9 @@ input.form-control {
     display: block; 
     align-items: center;
 }
+/* Fim do Estilo do Navbar */
 
+/* Estilo do Primeiro Conteúdo da Página */
 .content-after-navbar {
     margin-top: 70px;
 }
@@ -98,6 +101,7 @@ input.form-control {
     flex-direction: column;
     height: 600px;
     justify-content: center;
+    padding: 4rem 2rem;
 }
 
 .hero .mensagem {
@@ -120,8 +124,15 @@ input.form-control {
     font-size: 16px;
 }
 
+.container-botoes {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
 .container-botoes .btn {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     text-align: center;
     width: 400px;
 }
@@ -133,7 +144,7 @@ input.form-control {
     font-weight: 700;
     padding: 1rem 3rem;
     text-decoration: none;
-    margin-top: 35px;
+    margin-top: 20px;
     text-transform: none;
     font-size: 16px;
 }
@@ -143,6 +154,12 @@ input.form-control {
     color: #fff;
 }
 
+#btn-instalar {
+    background-color: #0f9f4d!important;
+}
+/* Fim Estilo do Primeiro Conteúdo da Página */
+
+/* Estilo do Secundo Conteúdo da Página */
 .apresentacao .titulo {
     padding: 6rem 2rem;
     text-align: center
@@ -199,36 +216,9 @@ input.form-control {
 .autor p {
   margin: 0;
 }
+/* Fim Estilo do Segundo Conteúdo da Página */
 
-footer {
-    background: #fff;
-    width: 100%;
-    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
-}
-
-footer .container-footer {
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 2rem;
-    text-align: center;
-}
-
-.title-footer {
-    color: #1c1e21;
-    font-weight: 700;
-}
-
-.description-footer {
-    color: #1c1e21;
-    flex: 1;
-    font-weight: 200;
-}
-
-.description-footer p{
-    margin: 0;
-}
-
-/* Custom Autores Card */
+/* Estilo Autores Card */
 .headerTitle {
     padding: 12rem 0 2rem;
     text-align: center;
@@ -328,14 +318,47 @@ footer .container-footer {
     transition: color 0ms cubic-bezier(0.08,0.52,0.52,1);
     text-decoration: initial;
 }
-/* Fim Custom Autores Card */
+/* Fim Estilo Autores Card */
 
+/* Estilo Footer */
+footer {
+    background: #fff;
+    width: 100%;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer .container-footer {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.title-footer {
+    color: #1c1e21;
+    font-weight: 700;
+}
+
+.description-footer {
+    color: #1c1e21;
+    flex: 1;
+    font-weight: 200;
+}
+
+.description-footer p{
+    margin: 0;
+}
+/* Fim Estilo Footer */
+
+/* Media Queries */
 @media screen and (min-width: 1024px) {
+    /* Estilo do Primeiro Conteúdo da Página */
     .hero h1 {
         font-size: 3rem;
         margin: 0 auto;
         width: 60%;
     }
+    /* Estilo do Segundo Conteúdo da Página */
     .apresentacao .titulo {
         margin: 0 auto;
         text-align: center;
@@ -358,18 +381,21 @@ footer .container-footer {
     .autor {
         text-align: left;
     }
+    /* Estilo Autores Card */
     .container-cards .card {
         width: 28%;
     }
 }
 
 @media screen and (min-width: 850px) and (max-width: 1023px){
+    /* Estilo Autores Card */
     .container-cards .card {
         width: 40%;
     }
 }
 
 @media (max-width: 996px) {
+    /* Estilo do Primeiro Conteúdo da Página */
     .hero {
         padding-left: 0;
         padding-right: 0;
@@ -377,15 +403,18 @@ footer .container-footer {
 }
 
 @media (min-width: 992px) {
+    /* Estilo Input Search Navbar */
     .first-form-search {
         display: none;
     }
 }
 
 @media (max-width: 992px) {
+    /* Estilo Input Search Navbar */
     #searchForm {
         display: none !important;
     }
+    /* Estilo Navbar */
     .navbar-brand {
         margin-left: 15px;
     }
@@ -400,6 +429,7 @@ footer .container-footer {
     .second-logo-inst {
         display: none;
     }
+    /* Estilo Tag <hr> Navbar */
     hr {
         display: block !important;
         margin: 0 !important;
@@ -413,21 +443,25 @@ footer .container-footer {
 }
 
 @media (max-width: 849px) {
+    /* Estilo Navbar */
     .navbar-brand {
-        display: none;
+        display: none !important;
     }
+    /* Estilo Autores Card */
     .container-cards .card {
         width: 90%;
     }
 }
 
 @media screen and (min-width: 850px) {
+    /* Estilo do Segundo Conteúdo da Página */
     .texto-container h1 {
         text-align: left;
     }
 }
 
 @media (max-width: 440px){
+    /* Estilo dos Botões do Primeiro Conteúdo da Página */
     .container-botoes .btn{
         width: 330px;
     }
@@ -437,21 +471,25 @@ footer .container-footer {
     .container-fluid {
         --mdb-gutter-x: 0 !important;
     }
+    /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .rounded-pill {
         width: 200px;
     }
+    /* Estilo dos Botões do Primeiro Conteúdo da Página */
     .container-botoes .btn{
         width: 280px;
     }
 }
 
 @media (max-width: 290px) {
+    /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .rounded-pill {
         width: 150px;
     }
 }
 
 @supports not (-webkit-touch-callout:none) {
+    /* Estilo do Primeiro Conteúdo da Página */
     .hero {
         background-attachment: fixed;
     }

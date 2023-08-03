@@ -1,8 +1,10 @@
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Logo from '../public/logo.svg'
 
 export const HomePage = () => {
-    var Logo = require('../public/logo.svg');
+    //Importação das Imagens
     var LogoIF = require('../public/ifms-dr-marca-2015.png');
     var LogoEmbrapa = require('../public/logo-embrapa-400.png');
     var LogoIFEmbrapa = require('../public/logo-if-embrapa.png');
@@ -10,16 +12,23 @@ export const HomePage = () => {
     var Harley = require('../public/harley.png');    
     return(
         <>
+            <Head>
+                <title>Embrapa</title>
+            </Head>
+
+            {/* Código Navbar Offcanvas */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top" aria-label="Offcanvas navbar large">
                 <div className="container-fluid">
                     <div className="d-flex align-items-center"> 
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
                             <i className="fas fa-bars"></i>
                         </button>
+                        {/* Logo Navbar */}
                         <a className="navbar-brand" href="/">
-                            <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                            <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
                         </a>
                     </div>
+                    {/* Input Search para tela menor que 992px */}
                     <div className="first-form-search">
                         <form className="d-flex rounded-pill p-1 position-relative first-form-search" role="search">
                             <div className="input-group">
@@ -38,11 +47,15 @@ export const HomePage = () => {
                         </form>
                     </div>
 
+                    {/* Código dos Itens Exibidos no Navbar */}
                     <div className="offcanvas offcanvas-start text-bg-light" tabIndex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
                         <div className="offcanvas-header">
                             <ul className="navbar-nav d-flex links-logo-ifembrapa flex-row mx-1">
+                                {/* Logo IF / Embrapa Dentro do Menu */}
                                 <li className="nav-item">
-                                    <Image src={LogoIFEmbrapa} className='me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <a href="/">
+                                        <Image src={LogoIFEmbrapa} className='me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    </a>
                                 </li>
                             </ul>
                             <button type="button" className="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -61,6 +74,7 @@ export const HomePage = () => {
                                     </Link>
                                 </li>
                             </ul>
+                            {/* Input Search para tela maior que 992px */}
                             <form id="searchForm" className="d-flex rounded-pill p-1 position-relative" role="search">
                                 <div className="input-group">
                                     <input
@@ -78,10 +92,10 @@ export const HomePage = () => {
                             </form>
                             <ul className="navbar-nav d-flex links-logo flex-row">
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoIF} className='logotipo me-3' width="100%" height={32} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <Image src={LogoIF} className='logotipo me-3' width="100%" height={32} alt="Logotiopo do IFMS Campus Dourados" priority/>
                                 </li>
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoEmbrapa} className='logotipo' width="100%" height={48} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <Image src={LogoEmbrapa} className='logotipo' width="100%" height={48} alt="Logotiopo da Embrapa" priority/>
                                 </li>
                             </ul>
                         </div>
@@ -89,17 +103,19 @@ export const HomePage = () => {
                 </div>
             </nav>
 
+            {/* Conteúdos da Página Principal */}
             <div className="px-4 py-5 text-center hero content-after-navbar">
                 <div className='messagem'>
-                    <Image className="d-block mx-auto mb-4" src={LogoCartilha} alt="" width="100%" height="128"/>
+                    <Image className="d-block mx-auto mb-2" src={LogoCartilha} alt="Logo da cartilha" width="100%" height="128"/>
                     <h1 className="display-5 fw-bold">Tecnologias para a Agricultura Familiar</h1>
                 </div>
                 <div className="col-lg-6 mx-auto">
                     <p className="lead mb-4">4<sup>a</sup> edição revista e atualizada</p>
-                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center container-botoes">
-                        <a href='#' type="button" className="btn btn-lg px-5">
+                    <div className="d-grid container-botoes">
+                        <Link href="/edicao-completa" type="button" className="btn">
                             Acessar a edição completa
-                        </a>
+                        </Link>
+                        <a id='btn-instalar' href="#" className='btn'>Instalar</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +139,8 @@ export const HomePage = () => {
                     </div>
                 </div>
             </div>
-                
+            
+            {/* Código Footer Embrapa */}
             <footer>
                 <div className="container container-footer">
                     <div className="title-footer">

@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Logo from '../public/logo.svg'
 
 export const Autores = () => {
-    var Logo = require('../public/logo.svg');
+    //Importação das Imagens
     var LogoIF = require('../public/ifms-dr-marca-2015.png');
     var LogoEmbrapa = require('../public/logo-embrapa-400.png');
     var LogoIFEmbrapa = require('../public/logo-if-embrapa.png');
 
+    //Fetch para pegar os dados da api Autors criada no Strapi
     const [data, setData] = useState([]);
-
     useEffect(() => {
         CarregaAutores();
         document.title = 'Embrapa Autores';
@@ -34,16 +36,23 @@ export const Autores = () => {
 
     return(
         <>
+            <Head>
+                <title>Embrapa</title>
+            </Head>
+            
+            {/* Código Navbar Offcanvas */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top" aria-label="Offcanvas navbar large">
                 <div className="container-fluid">
                     <div className="d-flex align-items-center"> 
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
                             <i className="fas fa-bars"></i>
                         </button>
+                        {/* Logo Navbar */}
                         <a className="navbar-brand" href="/">
-                            <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                            <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
                         </a>
                     </div>
+                    {/* Input Search para tela menor que 992px */}
                     <div className="first-form-search">
                         <form className="d-flex rounded-pill p-1 position-relative first-form-search" role="search">
                             <div className="input-group">
@@ -62,11 +71,15 @@ export const Autores = () => {
                         </form>
                     </div>
 
+                    {/* Código dos Itens Exibidos no Navbar */}
                     <div className="offcanvas offcanvas-start text-bg-light" tabIndex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
                         <div className="offcanvas-header">
                             <ul className="navbar-nav d-flex links-logo-ifembrapa flex-row mx-1">
+                                {/* Logo IF / Embrapa Dentro do Menu */}
                                 <li className="nav-item">
-                                    <Image src={LogoIFEmbrapa} className='me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <a href="/">
+                                        <Image src={LogoIFEmbrapa} className='me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    </a>
                                 </li>
                             </ul>
                             <button type="button" className="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -85,6 +98,7 @@ export const Autores = () => {
                                     </Link>
                                 </li>
                             </ul>
+                            {/* Input Search para tela maior que 992px */}
                             <form id="searchForm" className="d-flex rounded-pill p-1 position-relative" role="search">
                                 <div className="input-group">
                                     <input
@@ -102,10 +116,10 @@ export const Autores = () => {
                             </form>
                             <ul className="navbar-nav d-flex links-logo flex-row">
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoIF} className='logotipo me-3' width="100%" height={32} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <Image src={LogoIF} className='logotipo me-3' width="100%" height={32} alt="Logotiopo do IFMS Campus Dourados" priority/>
                                 </li>
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoEmbrapa} className='logotipo' width="100%" height={48} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
+                                    <Image src={LogoEmbrapa} className='logotipo' width="100%" height={48} alt="Logotiopo da Embrapa" priority/>
                                 </li>
                             </ul>
                         </div>
@@ -113,23 +127,30 @@ export const Autores = () => {
                 </div>
             </nav>
 
+            {/* Conteúdos dos Autores */}
             <div className="showcaseSection">
                 <div className="headerTitle">
                     <h1>Autores</h1>
                 </div>
+                {/* Código dos Card dos Autores */}
                 <div className="main-container-cards container-cards">
+                {/* Puxando os Dados do Fetch */}
                 {data.length > 0 ? (
                     data.map((item) => (
                     <div key={item.id} className="card">
                         <div className="containerAutor_v1t1">
+                            {/* Imagem dos Autores */}
                             <div className="containerFoto_oz_I">
-                                <img src={`http://localhost:1337${item.attributes?.image?.data?.attributes?.url}`} alt="Imagem" width="100%"/>
+                                <img src={`http://localhost:1337${item.attributes?.image?.data?.attributes?.url}`} alt="Foto dos Autores" width="100%"/>
                             </div>
+                            {/* Nome dos Autores */}
                             <p className="bold nome-autor">{item.attributes.name}</p>
                         </div>
+                        {/* Descrição dos Autores */}
                         <div className="cardContainer_HEVx">
                             <p className="descricao-autor">{item.attributes.description}</p>
                         </div>
+                        {/* Link para o Currículo dos Autores */}
                         <div className="action-card">
                             <a target="_blank" href={item.attributes.url}>Currículo Lattes</a>
                         </div>
@@ -140,7 +161,8 @@ export const Autores = () => {
                     )}
                 </div>
             </div>
-                
+
+            {/* Código Footer Embrapa */}    
             <footer>
                 <div className="container container-footer">
                     <div className="title-footer">

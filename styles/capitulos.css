@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
-
+/* Importação da Fonte */
 * {
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -10,6 +10,10 @@
 body {
   background-color: #fbfbfb;
 }
+/* Estilo da Div que pega o Conteúdo Inteiro da Cartilha */
+.container-wrapper {
+  display: flex;
+}
 
 hr {
   display: none;
@@ -18,13 +22,13 @@ hr {
 .list-group-item {
   border: none !important;
 }
-
+/* Estilo Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  padding: 50px 0 0;
+  padding: 70px 0 0;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
   width: 300px;
   flex: 0 0 300px; 
@@ -43,11 +47,6 @@ hr {
   display: none;
 }
 
-.itens-menu-cap{
-  align-items: initial !important;
-  flex-direction: column !important;
-}
-
 .sidebar .list-group-item:hover {
   background-color: #eef0f2;
   border-radius: 5px;
@@ -59,6 +58,12 @@ hr {
   font-weight: bold;
 }
 
+.btn-close-cap{
+  display: none;
+}
+/* Fim Estilo Sidebar */
+
+/* Estilo Navbar */
 .navbar-nav {
   align-items: center;
 } 
@@ -83,17 +88,16 @@ hr {
   right: 12px;
   transform: translateY(-50%);
 }
+/* Fim Estilo Navbar */
 
-.container-wrapper {
-  display: flex;
-}
-
+/* Estilo do Conteúdo da Cartilha */
 .home-section {
   flex: 1;
   margin-left: 300px;
   margin-right: 150px;
 }
 
+/* Estilo Navegação Estrutural */
 .breadcrumbs {
   list-style: none;
   padding: 0;
@@ -122,7 +126,9 @@ hr {
   background: rgba(0,0,0,.05);
   color: #3578e5;
 }
+/* Fim Estilo Navegação Estrutural */
 
+/* Estilo dos Textos da Cartilha */
 .bd-content h1 {
   font-size: 2.1rem;
   text-align: center;
@@ -179,7 +185,9 @@ hr {
 .negrito {
   font-weight: 700;
 }
+/* Fim Estilo dos Textos da Cartilha */
 
+/* Estilo do Table of Contents */
 .bd-toc-container{
   position: fixed;
   top: 120px;
@@ -193,12 +201,13 @@ hr {
   width: 100%;
   height: 45px;
   align-items: center;
-  display: flex;
-  justify-content: space-between;
+  display: flex !important;
+  justify-content: space-between !important;
+  text-align: inherit !important;
   padding: 0.4rem 0.8rem;
   font-size: 12px;
   color: #1c1e21 !important;
-  background-color: #ebedf0;
+  background-color: #ebedf0 !important;
 }
 
 .bd-toc nav {
@@ -217,26 +226,54 @@ hr {
 .bd-toc nav a:hover {
   color: #3578e5;
 }
+/* Fim Estilo do Table of Contents */
+/* Fim Estilo do Conteúdo da Cartilha */
 
+/* Media Queries */
 @media (min-width: 1440px) {
+  /* Editando o Espaçamento */
   .container {
     max-width: 1500px;
   }
 }
 
 @media (max-width: 992px) {
+  .container-wrapper {
+    flex-direction: column;
+  }
+  /* Estilo Sidebar*/
   .sidebar{
     width: 83vw;
+    padding: 0 0 0 0;
+    z-index: 9999 !important;
   }
+  #sidebarMenu {
+    flex: 0 0 100%;
+    margin: 0; 
+  }
+  .btn-close-cap{
+    display: block;
+    margin-right: 8px;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  } 
+  /* Estilo Input Search para tela maior que 992px */
   .hide-form-search2 {
     display: none !important;
   }
+  /* Estilo para os Itens do Navbar */
   .text-item-link {
     display: none;
   }
   .nav-item .img {
     display: none;
   }
+  /* Estilo Input Search para tela menor que 992px */
   .hide-form-search {
     display: flex;
     justify-content: flex-end; 
@@ -246,32 +283,29 @@ hr {
   .navbar-brand {
     margin-right: auto;
   }
+  /* Estilo <hr> do Menu */
   .line-menu {
     display: block;
     margin: 0.7rem 0 !important;
     color: #999999 !important;
   }
+  /* Estilo do Conteúdo da Cartilha */
   .right-sidebar .bd-layout {
     width: 100%;
-  }
-  .container-wrapper {
-    flex-direction: column;
-  }
-  #sidebarMenu {
-    flex: 0 0 100%;
-    margin: 0; 
   }
   .home-section {
     flex: 1;
     margin-left: 0;
     margin-right: 0;
   }
+  /* Estilo Table of Contents */
   .bd-toc-container{
     position: sticky !important;
   }
   .table-of-contents__left-border {
     border-left: none !important;
   }
+  /* Estilo do Botão de Retorno */
   .navbar-sidebar__back {
     display: block;
     background: rgba(0,0,0,.05);
@@ -290,30 +324,46 @@ hr {
     cursor: pointer;
     font-family: inherit;
   }
+  .itens-menu-cap{
+    align-items: initial !important;
+    flex-direction: column !important;
+  }
 }
 
 @media (max-width: 850px) {
+  /* Estilo IMG Navbar */
   .navbar-brand {
     display: none;
   }
 }
 
 @media (max-width: 768px){
+  /* Estilo Table of Contents */
   .bd-toc-collapse nav {
     padding: 1.25rem 1.25rem 1.25rem 1rem;
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     border-radius: 0.375rem;
+  }
 }
+
+@media (max-width: 360px){
+  .img-sidebar-top{
+    width: 68%;
+    height: 55;
+  }
 }
 
 @media (min-width: 991.98px) {
+  /* Estilo Input Search para tela menor que 992px */
   .hide-form-search {
-    display: none;
+    display: none !important;
   }
+  /* Estilo IMG Sidebar */
   .img-sidebar-top {
     display: none;
   }
+  /* Estilo Table of Contents */
   .bd-toc-container.bd-toc-center {
     text-align: center;
   }
