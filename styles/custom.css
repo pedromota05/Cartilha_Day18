@@ -9,6 +9,7 @@
 
 body {
     overflow: visible !important;
+    padding-right: 0 !important;
 }
 
 hr {
@@ -27,9 +28,9 @@ hr {
 
 .nav-item .nav-link {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: bold;
     color: #1c1e21;
-    margin-right: 12px;
+    margin-right: 16px;
 }
 
 .nav-item .nav-link:hover {
@@ -46,8 +47,9 @@ hr {
 }
 
 input.form-control {
-    background-color: #ebedf0;
-    box-shadow: none;
+    background-color: #ebedf0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    width: 220px !important;
 }
 
 .icone-search {
@@ -56,6 +58,7 @@ input.form-control {
     top: 50%;
     right: 12px;
     transform: translateY(-50%);
+    z-index: 10 !important;
 }
 
 .center-itens {

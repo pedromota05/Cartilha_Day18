@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '../public/logo.svg'
+import TableOfContents from '../components/TableOfContents'
 
 export const Capitulos = () => {
     //Importação das Imagens
@@ -11,9 +12,18 @@ export const Capitulos = () => {
     var LogoIFEmbrapa = require('../public/logo-if-embrapa.png');
 
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+
+    const openSidebar = () => {
+        setIsOffcanvasOpen(true);
+    };    
+
     const handleToggle = () => {
         setIsCollapsed((prevState) => !prevState);
     };  
+    const handleToggleBackDrop = () => {
+        setIsOffcanvasOpen((prevState) => !prevState);
+    };
 
     //Função para quando o usuário clicar no botão "← Voltar para o menu principal"
     const handleToggleMainNavbar = () => {
@@ -32,6 +42,7 @@ export const Capitulos = () => {
         if (sidebarMenu) {
           sidebarMenu.classList.remove("show");
         }
+        setIsOffcanvasOpen(false);
     }
    
     //useEffect para quando o usuário quiser fechar ou abrir os itens dentro do sumário do sidebar
@@ -63,7 +74,7 @@ export const Capitulos = () => {
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
                 {/* Código Sidebar */}
-                <nav id="sidebarMenu" className="collapse d-lg-block sidebar bg-white">
+                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
                     <div className="position-sticky">
                         <div id="summary" className="list-group list-group-flush mt-2 py-2">
                             {/* Logo IF / Embrapa Dentro do Menu */}
@@ -71,7 +82,7 @@ export const Capitulos = () => {
                                 <a href="/">
                                     <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
                                 </a>
-                                <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="sidebar" aria-label="Close" onClick={closeSidebar}></button>
+                                <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="offcanvas" aria-label="Close" onClick={closeSidebar}></button>
                             </div>
                             <hr className="featurette-divider line-menu"></hr>
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
@@ -151,7 +162,7 @@ export const Capitulos = () => {
                 <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
                     <div className="container-fluid">
                         <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-                            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle Offcanvas" onClick={handleToggleBackDrop}>
                             <i className="fas fa-bars"></i>
                         </button>
                         {/* Logo Navbar */}
@@ -214,6 +225,7 @@ export const Capitulos = () => {
                             </form>
                         </ul>
                     </div>
+                    {isOffcanvasOpen && <div className="offcanvas-backdrop show" onClick={handleToggleBackDrop}></div>}
                 </nav>
                 
                 {/* Conteúdo da Cartilha */}
@@ -241,60 +253,30 @@ export const Capitulos = () => {
 
                     <section className="home-section right-sidebar" style={{marginTop: 40}}>
                         {/* Código do Table of Contents */}
-                        <div className="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
-                            <main className="bd-main order-1 bd-toc-container">
-                                <div className="bd-toc mt-3 mb-5 my-lg-0 mb-lg-5 px-sm-1 text-body-secondary">
-                                    <button className="btn btn-link p-md-0 mb-2 mb-md-0 text-decoration-none bd-toc-toggle d-md-none full-width-btn" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="toc">
-                                        On this page{" "}
-                                        <i className="fas fa-arrows-alt-v" style={{fontSize: '16px'}}></i>
-                                    </button>
-                                    <div className='table-of-contents__left-border'>
-                                        <div className="collapse bd-toc-collapse d-md-block" id="tocContents">
-                                            <nav className="bd-toc">
-                                                <ul className="list-unstyled">
-                                                    <li><a href="#" className="">1. O que é</a></li>
-                                                    <li><a href="#">2. Benefícios e/ou vantagens</a></li>
-                                                    <li><a href="#">3. Como utilizar</a></li>
-                                                    <li><a href="#">4. Onde obter mais informações</a></li>
-                                                    <li>
-                                                        <ul className="list-unstyled pl-3">
-                                                        <li><a href="#">Vídeos</a></li>
-                                                        <li><a href="#">Publicação</a></li>
-                                                        <li><a href="#">Viveiristas credenciados para aquisição de mudas</a></li>
-                                                        <li><a href="#">Instituição</a></li>
-                                                        <li><a href="#">Fotos</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
-                                </div>
-                            </main>
-                        </div>
+                        <TableOfContents />
 
                         {/* Código dos Textos da Cartilha */}
-                        <div className="bd-content ps-lg-2">
+                        <div id="contents" className="bd-content ps-lg-2">
                             <h1>Capins-Elefantes BRS Kurumi e BRS Capiaçu</h1>
                                 <p className='center-textArticle'>Marciana Retore</p>
-
-                            <h2 id="capitulo-1">1. O que é</h2>
+                        <div>
+                            <h2>1. O que é</h2>
                                 <p>Os capins-elefantes BRS Kurumi e BRS Capiaçu, desenvolvidos pela Embrapa e parceiros, são da mesma espécie do Napier, indicados para alimentação do gado leiteiro, porém com finalidades diferentes.</p>
                                 <p>A cultivar BRS Kurumi apresenta porte baixo (anão), com alta proporção de folhas, de excelente qualidade, recomendada para pastejo rotacionado.</p>
                                 <p>Já a BRS Capiaçu é uma cultivar de porte alto, atingindo 4,2 m de altura. É indicada para cultivo de capineiras, visando à suplementação volumosa, na forma de silagem ou picada verde no cocho.</p>
 
-                            <h2 id="capitulo-2">2. Benefícios e/ou vantagens</h2>
+                            <h2>2. Benefícios e/ou vantagens</h2>
                                 <p>A BRS Kurumi apresenta 18% a 20% de proteína bruta e 68% a 70% de coeficiente de digestibilidade nas folhas, que é a parte consumida pelos animais. Em função do elevado teor de proteína do capim é imprescindível o fornecimento de alimento energético às vacas, para garantir o aporte adequado de energia e proteína no rúmen, para que a produção de leite ocorra em quantidade e qualidade. A cultivar possui elevada produção de folhas e pequeno alongamento do colmo, devido aos entrenós curtos, o que facilita o manejo do capim, não necessitando de roçadas após o pastejo. Além disso, apresenta intenso perfilhamento.</p>
                                 <p>A BRS Capiaçu é indicada para a produção de silagem, apresentando, em média, 5,5% de proteína bruta, e também para ser fornecida picada verde no cocho, com 8% a 9% de proteína bruta. A produção de massa seca é 30% superior aos demais capins da espécie, alcançando 50 toneladas de matéria seca por hectare. Além do elevado potencial produtivo, apresenta resistência ao tombamento, ausência de joçal (pelos), facilidade para colheita mecanizada e permite três a quatro cortes por ano.</p>
 
-                            <h2 id="capitulo-3">3. Como utilizar</h2>
+                            <h2>3. Como utilizar</h2>
                                 <p>O plantio de ambos os capins deve ser feito durante a estação chuvosa, em solos bem drenados e de boa fertilidade, por meio de propagação vegetativa (colmos).</p>
                                 <p>Para o plantio da BRS Kurumi, fazer covas com espaçamento de 50 cm x 50 cm ou 80 cm x 80 cm, com cerca de 10 cm de profundidade; colocar e cobrir os colmos, que devem conter cerca de três nós. Recomenda-se a entrada dos animais no piquete quando o capim apresentar 80 cm de altura e a saída quando este for rebaixado a 40 cm de altura. Pastejos muito severos irão esgotar as reservas orgânicas, diminuindo a capacidade de rebrota do capim.</p>
                                 <p>Para a BRS Capiaçu, o plantio deve ser feito em sulcos espaçados entre si de 0,80 m a 1,20 m, o que dependerá do maquinário de cada propriedade, com o objetivo de evitar que o rodado do trator e dos implementos agrícolas esmague as touceiras do capim. Os colmos podem ser distribuídos inteiros ou fracionados (contendo três a quatro nós) e enterrados na profundidade de 10 cm a 15 cm. Para fornecimento do material fresco, o ideal é cortá-lo com idade entre 50 dias e 70 dias, por apresentar melhor qualidade nutritiva. Para produção de silagem, a idade indicada para o corte da planta é entre 90 dias e 110 dias; essa faixa de idade é onde o capim apresenta melhor relação entre produção de matéria seca e composição química. A adição de milho triturado (4% a 8%), por exemplo, aumenta o teor de matéria seca da silagem e melhora sua qualidade, por reduzir a produção de efluentes (chorume).</p>
                                 <p>Tanto a BRS Kurumi quanto a BRS Capiaçu são muito exigentes em fertilidade. Por isso, antes do plantio, o ideal é fazer a análise de solo para realizar a correção necessária. Após cada pastejo ou corte, recomenda-se aplicação de nitrogênio. Outro ponto importante é que as cultivares são suscetíveis à cigarrinha das pastagens. No entanto, existem inseticidas químicos e biológicos para controle do inseto.</p>
                                 <p>As cultivares são materiais de excelente qualidade, porém, como qualquer outro capim-elefante, precisam de água e temperaturas elevadas para se desenvolverem. Portanto, considerando as condições climáticas de Mato Grosso do Sul, é necessário planejar a produção de volumoso durante o período das águas para ter oferta de alimento o ano todo.</p>
 
-                            <h2 id="capitulo-4">4. Onde obter mais informações</h2>
+                            <h2>4. Onde obter mais informações</h2>
                             <h3>Vídeos</h3>
                                 <p className='links-bottom'><a href="#">Capins para gado leiteiro, BRS Kurumi e BRS Capiaçu – Pastagem</a></p>
                                 <p className='links-bottom'><a href="#">Produção de mudas de capim-elefante anão BRS Kurumi</a></p>
@@ -316,6 +298,7 @@ export const Capitulos = () => {
                                     <span className="negrito">Local:</span> Dourados, MS
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </section>
                 </div>
