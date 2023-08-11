@@ -7,12 +7,18 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden !important;
+}
+
 body {
   background-color: #fbfbfb;
+  word-wrap: break-word;
 }
 /* Estilo da Div que pega o Conteúdo Inteiro da Cartilha */
 .container-wrapper {
   display: flex;
+  padding: 1.2rem !important;
 }
 
 hr {
@@ -61,6 +67,15 @@ hr {
 .btn-close-cap{
   display: none;
 }
+
+/* Add this CSS to your stylesheet */
+.logo-container-fixed {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+
 /* Fim Estilo Sidebar */
 
 /* Estilo Navbar */
@@ -101,16 +116,16 @@ hr {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
+  display: inline-block;
 }
 
 .breadcrumbs__item {
-  display: flex;
-  align-items: center;
+  display: inline-block;
   margin-right: 10px;
 }
 
 .breadcrumbs__link {
+  display: inline-block;
   color: #1c1e21;
   font-size: 13px;
   text-decoration: none;
@@ -135,6 +150,13 @@ hr {
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 1rem;
+  color: #1c1e21;
+}
+
+.bd-content .paragrafo{
+  font-size: 16px;
+  margin: 0 0 20px;
+  color: #1c1e21;
 }
 
 .center-textArticle {
@@ -142,25 +164,32 @@ hr {
   justify-content: center;
   text-align: center;
   font-size: 1rem;
-  margin-bottom: 6rem;
+  margin: 0 0 70px;
   font-weight: 700;
+  color: #1c1e21;
 }
 
-.bd-content h2 a {
-  font-size: 1.6rem;
+.bd-content h2 {
+  font-size: 25px;
   font-weight: 700;
   line-height: 1.25;
-  color: inherit;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  color: #1c1e21;
+  margin: 40px 0 20px;
 }
 
-.bd-content h3 a {
+.bd-content h3 {
   font-size: 1rem;
   font-weight: 700;
-  color: inherit;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  color: #1c1e21;
+  margin: 30px 0 20px;
+  padding: 32px 0 0;
+}
+
+.bd-content img {
+  height: auto;
+  margin: 0 0 20px;
+  align-self: center;
+  max-width: 100%;
 }
 
 .links-bottom a {
@@ -187,7 +216,7 @@ hr {
 /* Fim Estilo dos Textos da Cartilha */
 
 /* Estilo do Table of Contents */
-.bd-toc-container{
+.bd-toc-container {
   position: fixed;
   top: 120px;
 }
@@ -249,7 +278,7 @@ hr {
 @media (min-width: 1440px) {
   /* Editando o Espaçamento */
   .container {
-    max-width: 1500px;
+    max-width: 1320px !important;
   }
 }
 
@@ -277,7 +306,18 @@ hr {
     justify-content: space-between;
     margin: 0;
     padding: 0;
-  } 
+  }
+
+  .custom-link {
+    color: #606770;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .custom-link.active {
+    color: #3578e5;
+    font-weight: bold;
+  }
   /* Estilo Input Search para tela maior que 992px */
   .hide-form-search2 {
     display: none !important;
@@ -333,6 +373,12 @@ hr {
   .h3-toc-item a {
     font-size: 15px !important;
   }
+  .text-with-toc {
+    flex-direction: column-reverse;
+  }
+  .table-of-contents {
+    margin-top: 20px; /* Espaçamento acima do TOC */
+  }
   /* Estilo do Botão de Retorno */
   .navbar-sidebar__back {
     display: block;
@@ -372,6 +418,17 @@ hr {
   }
 }
 
+@media (max-width: 290px) {
+  .img-sidebar-top{
+    width: 82%;
+    height: 55;
+  }
+  .breadcrumbs__link {
+    font-size: 11px;
+    padding: 1px;
+  }
+}
+
 @media (min-width: 991.98px) {
   /* Estilo Input Search para tela menor que 992px */
   .hide-form-search {
@@ -390,5 +447,15 @@ hr {
     justify-content: flex-end;
     align-items: flex-start;
     flex-direction: row-reverse;
+  }
+  .text-with-toc {
+    display: flex;
+    justify-content: row;
+  }
+  .text-content {
+    flex: 1;
+  }
+  .table-of-contents {
+    flex: 0 0 50px;
   }
 }

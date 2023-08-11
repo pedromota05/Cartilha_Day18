@@ -489,6 +489,16 @@ footer .container-footer {
     .rounded-pill {
         width: 150px;
     }
+    .hero{
+        display: block;
+        height: 650px;
+    }
+    .texto-container {
+        padding: 2rem;
+    }
+    .nav-item a .me-3{
+        width: 160px;
+    }
 }
 
 @supports not (-webkit-touch-callout:none) {

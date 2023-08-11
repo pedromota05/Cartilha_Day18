@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TableOfContents = () => {
+const TableOfContents = ({ headerBlocks }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleContent = () => {
@@ -10,31 +10,30 @@ const TableOfContents = () => {
     useEffect(() => {
         const headings = document.querySelectorAll("h2, h3");
         const tocList = document.getElementById("toc");
+        tocList.innerHTML = ''; // Clear the existing contents of the TOC list
 
-        if (tocList && tocList.childNodes.length === 0) {
-            headings.forEach((heading) => {
-                const openLevel = parseInt(heading.tagName.substr(1));
-                const titleText = heading.textContent;
-                const anchor = titleText.replace(/ /g, "_");
+        headings.forEach((heading) => {
+            const openLevel = parseInt(heading.tagName.substr(1));
+            const titleText = heading.textContent;
+            const anchor = titleText.replace(/ /g, "_");
 
-                const tocItem = document.createElement("li");
-                const tocLink = document.createElement("a");
-                tocLink.href = `#${anchor}`;
-                tocLink.textContent = titleText;
-                tocItem.appendChild(tocLink);
+            const tocItem = document.createElement("li");
+            const tocLink = document.createElement("a");
+            tocLink.href = `#${anchor}`;
+            tocLink.textContent = titleText;
+            tocItem.appendChild(tocLink);
 
-                if (openLevel === 2) {
-                    tocItem.classList.add("h2-toc-item");
-                } else if (openLevel === 3) {
-                    tocItem.classList.add("h3-toc-item");
-                }
+            if (openLevel === 2) {
+                tocItem.classList.add("h2-toc-item");
+            } else if (openLevel === 3) {
+                tocItem.classList.add("h3-toc-item");
+            }
 
-                tocList.appendChild(tocItem);
+            tocList.appendChild(tocItem);
 
-                heading.innerHTML = `<a id="${anchor}" href="#${anchor}">${heading.innerHTML}</a>`;
-            });
-        }
-    }, []);
+            heading.innerHTML = `<a id="${anchor}" href="#${anchor}">${heading.innerHTML}</a>`;
+        });
+    }, [headerBlocks]);
 
     return (
         <div className="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
