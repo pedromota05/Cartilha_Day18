@@ -57,6 +57,17 @@ hr {
   background-color: #eef0f2;
   border-radius: 5px;
 }
+.list-group-item.active{
+  background-color: #eef0f2 !important;
+}
+.list-group-item a {
+  color: #606770;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.active-link-summary {
+  color: #3578e5 !important;
+}
 
 .collapsed .icon-deg {
   color: #606770;
@@ -75,7 +86,6 @@ hr {
   background-color: white;
   z-index: 1;
 }
-
 /* Fim Estilo Sidebar */
 
 /* Estilo Navbar */
@@ -169,18 +179,24 @@ hr {
   color: #1c1e21;
 }
 
+.bd-content h2 a{
+  color: #1c1e21 !important;
+}
+
+.bd-content h3 a{
+  color: #1c1e21 !important;
+}
+
 .bd-content h2 {
   font-size: 25px;
   font-weight: 700;
   line-height: 1.25;
-  color: #1c1e21;
   margin: 40px 0 20px;
 }
 
 .bd-content h3 {
   font-size: 1rem;
   font-weight: 700;
-  color: #1c1e21;
   margin: 30px 0 20px;
   padding: 32px 0 0;
 }
@@ -226,6 +242,15 @@ hr {
   display: block;
   height: 120px; 
   margin: -120px 0 0;
+}
+
+.toc-active {
+  color: #ff0000; /* Change this color to your desired active link color */
+}
+
+/* Inactive link style */
+.toc-inactive {
+  color: #000000; /* Change this color to your desired inactive link color */
 }
 
 .table-of-contents__left-border {

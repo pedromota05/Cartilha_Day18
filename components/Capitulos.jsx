@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Logo from '../public/logo.svg'
 // import TableOfContents from '../components/TableOfContents'
 import TextCapitulos from './TextCapitulos'
@@ -11,6 +12,9 @@ export const Capitulos = () => {
     var LogoIF = require('../public/ifms-dr-marca-2015.png');
     var LogoEmbrapa = require('../public/logo-embrapa-400.png');
     var LogoIFEmbrapa = require('../public/logo-if-embrapa.png');
+
+    const router = useRouter();
+    const { query } = router;
 
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -71,11 +75,15 @@ export const Capitulos = () => {
             backButton.removeEventListener('click', handleToggleMainNavbar);
         };
     }, [isCollapsed]);
-
+    
+    //Puxando a API
     useEffect(() => {
         CarregaCapitulos();
         document.title = 'Embrapa Capitulos';
-    }, []);
+        if (query.activeChapter) {
+            setActiveTitle(parseInt(query.activeChapter));
+        }
+    }, [query.activeChapter]);
 
     const CarregaCapitulos = async () => {
         const url = 'http://10.11.34.128:1337/api/capitulos?populate=*';
@@ -94,11 +102,23 @@ export const Capitulos = () => {
         }
     };
 
+    //Código para deixar o primeiro capitulo ativo e quando atualizar a página manter na mesma
     useEffect(() => {
-        if (data.length > 0 && activeTitle === null) {
-            setActiveTitle(data[0].id); // Definir o primeiro capítulo como ativo por padrão
+        if (data.length > 0) {
+            const storedActiveChapter = localStorage.getItem('activeChapter');
+            if (storedActiveChapter) {
+                setActiveTitle(parseInt(storedActiveChapter));
+            } else {
+                setActiveTitle(data[0].id);
+            }
         }
-    }, [data, activeTitle]);
+    }, [data]);
+
+    useEffect(() => {
+        if (activeTitle !== null) {
+            localStorage.setItem('activeChapter', activeTitle);
+        }
+    }, [activeTitle]);
 
     return(
         <>
@@ -125,25 +145,28 @@ export const Capitulos = () => {
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                             <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
                             {/* Dropdown do Sumário */}
-                            <a className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
+                            <a 
+                                className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
                                 isCollapsed ? 'collapsed' : ''
                                 }`}
                                 aria-current="true"
-                                onClick={handleToggle} 
+                                onClick={handleToggle}
                             >
                                 <span className="w-100 text-primary">Sumário</span>{' '}
                                 <i className={`fas fa-chevron-${isCollapsed ? 'right' : 'down'} icon-deg`}></i>
                             </a>
-                            {/* Conteúdo do Sidebar, denntro do Dropdown Sumário */}
+                            {/* Conteúdo do Sidebar, dentro do Dropdown Sumário */}
                             {data.length > 0 ? (
                             data.map((item) => (
                                 <ul key={item.id} id="collapseExample1"
-                                    className={`list-group list-group-flush mx-3 ${isCollapsed ? 'collapse' : 'show'}`}
+                                    className={`list-group list-group-flush mx-2 py-1 ${isCollapsed ? 'collapse' : 'show'}`}
                                 >
-                                    <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}>
+                                    <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
+                                        onClick={() => handleTitleClick(item.id)} 
+                                        style={{cursor: 'pointer'}}
+                                    >
                                         <a 
                                             href={`#capitulo_${item.id}`} 
-                                            onClick={() => handleTitleClick(item.id)} 
                                             className={activeTitle === item.id ? 'active-link-summary' : ''}
                                         >
                                             {item.attributes.title}
@@ -152,7 +175,7 @@ export const Capitulos = () => {
                                 </ul>
                             ))
                             ) : (
-                                <p>Carregando dados...</p>
+                                <p className='d-flex justify-content-center' style={{marginTop: 20}}>Carregando dados...</p>
                             )}
                         </div>
                     </div>
@@ -252,7 +275,7 @@ export const Capitulos = () => {
                 
                 {/* Conteúdo da Cartilha */}
                 <div className='container spacing-cap'>
-                    <nav className="home-section" aria-label="Breadcrumbs" style={{marginTop: 110}}>
+                    <nav className="home-section" aria-label="Breadcrumbs" style={{marginTop: 110}}>    
                         {/* Código Navegação Estrutural | Trilha de Navegção do Usuário */}
                         <ul className="breadcrumbs">
                             <li className="breadcrumbs__item">
@@ -267,7 +290,9 @@ export const Capitulos = () => {
                                 <i className="fas fa-chevron-right" style={{fontSize: '10px'}}></i>
                             </li>
                             <li className="breadcrumbs__item breadcrumbs__item--active">
-                                <span className="breadcrumbs__link" itemProp="name">Capins-Elefantes BRS Kurumi e BRS Capiaçu</span>
+                                <span className="breadcrumbs__link" itemProp="name">
+                                    {data.find(item => item.id === activeTitle)?.attributes.title || 'Título do Capítulo'}
+                                </span>
                                 <meta itemProp="position" content="2" />
                             </li>
                         </ul>
