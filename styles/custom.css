@@ -227,7 +227,7 @@ input.form-control {
     text-align: center;
 }
 
-.headerTitle h1{
+.headerTitle h1 {
     color: #1c1e21;
     font-weight: 700;
     font-size: 2rem;
@@ -348,7 +348,7 @@ footer .container-footer {
     font-weight: 200;
 }
 
-.description-footer p{
+.description-footer p {
     margin: 0;
 }
 /* Fim Estilo Footer */
@@ -390,7 +390,7 @@ footer .container-footer {
     }
 }
 
-@media screen and (min-width: 850px) and (max-width: 1023px){
+@media screen and (min-width: 850px) and (max-width: 1023px) {
     /* Estilo Autores Card */
     .container-cards .card {
         width: 40%;
@@ -438,10 +438,17 @@ footer .container-footer {
         margin: 0 !important;
         color: #999999 !important;
     }
-    .back-item-link:hover{
+    .back-item-link:hover {
         background-color: #eef0f2;
         border-radius: 5px;
         display: block;
+    }
+}
+
+@media (max-width: 1060px) {
+    .nav-item .nav-link {
+      font-size: 14px !important;
+      margin-right: 0 !important;
     }
 }
 
@@ -463,10 +470,16 @@ footer .container-footer {
     }
 }
 
-@media (max-width: 440px){
+@media (max-width: 440px) {
     /* Estilo dos Botões do Primeiro Conteúdo da Página */
-    .container-botoes .btn{
+    .container-botoes .btn {
         width: 330px;
+    }
+    .input-group>.form-control {
+        right: 15px;
+    }
+    .icone-search {
+        right: 25px;
     }
 }
 
@@ -476,10 +489,10 @@ footer .container-footer {
     }
     /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .rounded-pill {
-        width: 200px;
+        width: 200px !important;
     }
     /* Estilo dos Botões do Primeiro Conteúdo da Página */
-    .container-botoes .btn{
+    .container-botoes .btn {
         width: 280px;
     }
 }
@@ -487,16 +500,16 @@ footer .container-footer {
 @media (max-width: 290px) {
     /* Estilo do Input Search Navbar para Tela Menor que 992px */
     .rounded-pill {
-        width: 150px;
+        width: 150px !important;
     }
-    .hero{
+    .hero {
         display: block;
         height: 650px;
     }
     .texto-container {
         padding: 2rem;
     }
-    .nav-item a .me-3{
+    .nav-item a .me-3 {
         width: 160px;
     }
 }

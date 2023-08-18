@@ -15,19 +15,49 @@ body {
   background-color: #fbfbfb;
   word-wrap: break-word;
 }
+
+/* Add this to your CSS file */
+.active-toc-item {
+  color: #FF0000; /* Change this to the desired color */
+  /* Add other styles as needed */
+}
+
 /* Estilo da Div que pega o Conteúdo Inteiro da Cartilha */
 .container-wrapper {
   display: flex;
-  padding: 1.2rem !important;
+  width: 100%;
+  flex: 1 0;
+}
+
+.container {
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.padding-top--md {
+  padding-top: 1rem !important;
+}
+
+.padding-bottom--lg {
+  padding-bottom: 2rem !important;
 }
 
 hr {
   display: none;
 }
 
+.col {
+  padding: 0 1rem !important;
+}
+
 .list-group-item {
   border: none !important;
 }
+
+.article {
+  text-align: justify;
+}
+
 /* Estilo Sidebar */
 .sidebar {
   position: fixed;
@@ -37,19 +67,20 @@ hr {
   padding: 70px 0 0;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
   width: 300px;
-  flex: 0 0 280px; 
+  flex: 0 0 250px; 
   overflow-y: auto;
   color: #606770;
   font-weight: 600;
   line-height: 1.5;
   z-index: 1 !important;
+  flex-shrink: 0;
 }
 
-.navbar-sidebar__back{
+.navbar-sidebar__back {
   display: none;
 }
 
-#main-navbar-options-menu{
+#main-navbar-options-menu {
   display: none;
 }
 
@@ -75,7 +106,7 @@ hr {
   font-weight: bold;
 }
 
-.btn-close-cap{
+.btn-close-cap {
   display: none;
 }
 
@@ -117,8 +148,7 @@ hr {
 /* Estilo do Conteúdo da Cartilha */
 .home-section {
   flex: 1;
-  margin-left: 280px;
-  margin-right: 150px;
+  margin-left: 300px;
 }
 
 /* Estilo Navegação Estrutural */
@@ -163,7 +193,7 @@ hr {
   color: #1c1e21;
 }
 
-.bd-content .paragrafo{
+.bd-content .paragrafo {
   font-size: 16px;
   margin: 0 0 20px;
   color: #1c1e21;
@@ -179,11 +209,11 @@ hr {
   color: #1c1e21;
 }
 
-.bd-content h2 a{
+.bd-content h2 a {
   color: #1c1e21 !important;
 }
 
-.bd-content h3 a{
+.bd-content h3 a {
   color: #1c1e21 !important;
 }
 
@@ -244,15 +274,6 @@ hr {
   margin: -120px 0 0;
 }
 
-.toc-active {
-  color: #ff0000; /* Change this color to your desired active link color */
-}
-
-/* Inactive link style */
-.toc-inactive {
-  color: #000000; /* Change this color to your desired inactive link color */
-}
-
 .table-of-contents__left-border {
   border-left: 1px solid #dadde1;
 }
@@ -265,7 +286,7 @@ hr {
   justify-content: space-between !important;
   text-align: inherit !important;
   padding: 0.4rem 0.8rem;
-  font-size: 12px;
+  font-size: 13px;
   color: #1c1e21 !important;
   background-color: #ebedf0 !important;
 }
@@ -287,23 +308,89 @@ hr {
   color: #3578e5;
 }
 
-.h2-toc-item {
-  font-weight: bold;
-}
-
 .h3-toc-item a {
   font-size: 13px !important;
   margin-left: 1.2rem;
   font-weight: 500;
 }
+
+.text-with-toc {
+  display: flex;
+  justify-content: row;
+}
+
+.text-content {
+  flex: 1;
+}
 /* Fim Estilo do Table of Contents */
+
+/* Estilo Prev e Next */
+.docusaurus-mt-lg {
+  margin-top: 3rem;
+}
+
+.pagination-nav {
+  grid-gap: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.pagination-nav__link--prev {
+  text-align: left;
+}
+
+.pagination-nav__link--next {
+  grid-column: 2/3;
+  text-align: right;
+}
+
+.pagination-nav__link {
+  border: 1px solid #dadde1;
+  border-radius: 0.4rem;
+  display: block;
+  height: 100%;
+  line-height: 1.25;
+  padding: 1.2rem;
+  transition: border-color 0ms cubic-bezier(0.08,0.52,0.52,1);
+  background-color: transparent !important;
+}
+
+.pagination-nav__sublabel {
+  color: #525860;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.pagination-nav__label {
+  font-size: 0.94rem;
+  font-weight: 700;
+  word-break: break-word;
+  color: #3578e5;
+}
+/* Fim Estilo Prev e Next */
 /* Fim Estilo do Conteúdo da Cartilha */
 
 /* Media Queries */
 @media (min-width: 1440px) {
   /* Editando o Espaçamento */
   .container {
-    max-width: 1320px !important;
+    max-width: 1320px;
+  }
+  .docMainContainer_gTbr {
+    flex-grow: 1;
+    max-width: calc(100% - 300px) !important;
+  }
+}
+
+@media (max-width: 1060px) {
+  .text-item-link a {
+    font-size: 14px !important;
+    margin-right: 0 !important;
+  }
+  .rounded-pill {
+    width: 180px;
   }
 }
 
@@ -312,7 +399,7 @@ hr {
     flex-direction: column;
   }
   /* Estilo Sidebar*/
-  .sidebar{
+  .sidebar {
     width: 83vw;
     padding: 0 0 0 0;
     z-index: 9999 !important;
@@ -321,7 +408,7 @@ hr {
     flex: 0 0 100%;
     margin: 0; 
   }
-  .btn-close-cap{
+  .btn-close-cap {
     display: block;
     margin-right: 8px;
   }
@@ -332,13 +419,11 @@ hr {
     margin: 0;
     padding: 0;
   }
-
   .custom-link {
     color: #606770;
     text-decoration: none;
     transition: color 0.3s;
   }
-
   .custom-link.active {
     color: #3578e5;
     font-weight: bold;
@@ -361,6 +446,9 @@ hr {
     align-items: center; 
     margin-right: 15px; 
   }
+  .rounded-pill {
+    width: 250px;
+  }
   .navbar-brand {
     margin-right: auto;
   }
@@ -380,8 +468,9 @@ hr {
     margin-right: 0;
   }
   /* Estilo Table of Contents */
-  .bd-toc-container{
+  .bd-toc-container {
     position: sticky !important;
+    margin-top: -40px;
   }
   .table-of-contents__left-border {
     border-left: none !important;
@@ -394,7 +483,6 @@ hr {
   .bd-toc nav a {
     font-size: 15px;
   }
-  
   .h3-toc-item a {
     font-size: 15px !important;
   }
@@ -423,7 +511,7 @@ hr {
     cursor: pointer;
     font-family: inherit;
   }
-  .itens-menu-cap{
+  .itens-menu-cap {
     align-items: initial !important;
     flex-direction: column !important;
   }
@@ -436,15 +524,15 @@ hr {
   }
 }
 
-@media (max-width: 360px){
-  .img-sidebar-top{
+@media (max-width: 360px) {
+  .img-sidebar-top {
     width: 68%;
     height: 55;
   }
 }
 
 @media (max-width: 290px) {
-  .img-sidebar-top{
+  .img-sidebar-top {
     width: 82%;
     height: 55;
   }
@@ -454,7 +542,11 @@ hr {
   }
 }
 
-@media (min-width: 991.98px) {
+@media (min-width: 992px) {
+  .docMainContainer_gTbr {
+    flex-grow: 1;
+    max-width: calc(100% - 100px);
+  }
   /* Estilo Input Search para tela menor que 992px */
   .hide-form-search {
     display: none !important;
@@ -467,20 +559,13 @@ hr {
   .bd-toc-container.bd-toc-center {
     text-align: center;
   }
+  .bd-toc-container {
+    max-width: 350px;
+  }
   .right-sidebar {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
     flex-direction: row-reverse;
-  }
-  .text-with-toc {
-    display: flex;
-    justify-content: row;
-  }
-  .text-content {
-    flex: 1;
-  }
-  .table-of-contents {
-    flex: 0 0 50px;
   }
 }

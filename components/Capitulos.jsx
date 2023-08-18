@@ -86,7 +86,7 @@ export const Capitulos = () => {
     }, [query.activeChapter]);
 
     const CarregaCapitulos = async () => {
-        const url = 'http://10.11.34.128:1337/api/capitulos?populate=*';
+        const url = 'https://api-cartilha.onrender.com/api/capitulos?populate=*';
         try {
             const response = await fetch(url);
             if (response.ok) {
@@ -118,7 +118,16 @@ export const Capitulos = () => {
         if (activeTitle !== null) {
             localStorage.setItem('activeChapter', activeTitle);
         }
+        scrollToTop();
     }, [activeTitle]);
+
+    // Função para rolar a página para o topo
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth', // Adicionando um efeito de rolagem suave
+        });
+    };
 
     return(
         <>
@@ -162,7 +171,7 @@ export const Capitulos = () => {
                                     className={`list-group list-group-flush mx-2 py-1 ${isCollapsed ? 'collapse' : 'show'}`}
                                 >
                                     <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
-                                        onClick={() => handleTitleClick(item.id)} 
+                                        onClick={() => { handleTitleClick(item.id); setIsOffcanvasOpen(false);}}
                                         style={{cursor: 'pointer'}}
                                     >
                                         <a 
@@ -274,37 +283,41 @@ export const Capitulos = () => {
                 </nav>
                 
                 {/* Conteúdo da Cartilha */}
-                <div className='container spacing-cap'>
-                    <nav className="home-section" aria-label="Breadcrumbs" style={{marginTop: 110}}>    
-                        {/* Código Navegação Estrutural | Trilha de Navegção do Usuário */}
-                        <ul className="breadcrumbs">
-                            <li className="breadcrumbs__item">
-                                <Link href="/" className="breadcrumbs__link">
-                                    <i className="fas fa-home" style={{fontSize: '13px'}}></i>
-                                </Link>
-                                <i className="fas fa-chevron-right" style={{fontSize: '10px'}}></i>
-                            </li>
-                            <li className="breadcrumbs__item">
-                                <span className="breadcrumbs__link">Sumário</span>
-                                <meta itemProp="position" content="1" />
-                                <i className="fas fa-chevron-right" style={{fontSize: '10px'}}></i>
-                            </li>
-                            <li className="breadcrumbs__item breadcrumbs__item--active">
-                                <span className="breadcrumbs__link" itemProp="name">
-                                    {data.find(item => item.id === activeTitle)?.attributes.title || 'Título do Capítulo'}
-                                </span>
-                                <meta itemProp="position" content="2" />
-                            </li>
-                        </ul>
-                    </nav>
-
-                    <section className="home-section right-sidebar" style={{marginTop: 40}}>
-                        {/* Código dos Textos da Cartilha */}
-                        <div id="contents" className="bd-content ps-lg-2">
-                            <TextCapitulos lista = {data} activeTitle={activeTitle}/>
-                        </div>
-                    </section>
+                <main className='docMainContainer_gTbr'>
+                <div className='container .padding-top--md padding-bottom--lg'>
+                    <div className='col'>
+                        <nav className="home-section" aria-label="Breadcrumbs" style={{marginTop: 120}}>    
+                            {/* Código Navegação Estrutural | Trilha de Navegção do Usuário */}
+                            <ul className="breadcrumbs">
+                                <li className="breadcrumbs__item">
+                                    <Link href="/" className="breadcrumbs__link">
+                                        <i className="fas fa-home" style={{fontSize: '13px'}}></i>
+                                    </Link>
+                                    <i className="fas fa-chevron-right" style={{fontSize: '10px'}}></i>
+                                </li>
+                                <li className="breadcrumbs__item">
+                                    <span className="breadcrumbs__link">Sumário</span>
+                                    <meta itemProp="position" content="1" />
+                                    <i className="fas fa-chevron-right" style={{fontSize: '10px'}}></i>
+                                </li>
+                                <li className="breadcrumbs__item breadcrumbs__item--active">
+                                    <span className="breadcrumbs__link" itemProp="name">
+                                        {data.find(item => item.id === activeTitle)?.attributes.title || 'Título do Capítulo'}
+                                    </span>
+                                    <meta itemProp="position" content="2" />
+                                </li>
+                            </ul>
+                        </nav>
+                    
+                            <section className="home-section right-sidebar" style={{marginTop: 30}}>
+                                {/* Código dos Textos da Cartilha */}
+                                <div id="contents" className="bd-content ps-lg-2">
+                                    <TextCapitulos lista = {data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} />
+                                </div>
+                            </section>
+                    </div>
                 </div>
+                </main>
             </div>
             
             {/* Código Footer Embrapa */}  

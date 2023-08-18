@@ -48,7 +48,7 @@ const TableOfContents = ({ headerBlocks }) => {
                         aria-controls="toc"
                         onClick={toggleContent}
                     >
-                        On this page{" "}
+                        Nessa página{" "}
                         <i
                             className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`}
                             style={{ fontSize: '18px' }}
