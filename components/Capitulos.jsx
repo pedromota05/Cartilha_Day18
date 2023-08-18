@@ -7,6 +7,7 @@ import Logo from '../public/logo.svg'
 // import TableOfContents from '../components/TableOfContents'
 import TextCapitulos from './TextCapitulos'
 
+
 export const Capitulos = () => {
     //Importação das Imagens
     var LogoIF = require('../public/ifms-dr-marca-2015.png');
@@ -137,6 +138,7 @@ export const Capitulos = () => {
 
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
+
                 {/* Código Sidebar */}
                 <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
                     <div className="position-sticky">
@@ -144,15 +146,18 @@ export const Capitulos = () => {
                             {/* Logo IF / Embrapa Dentro do Menu */}
                             <div className='logo-container-fixed'>
                                 <div className="logo-container d-flex align-items-center justify-content-between">
-                                    <a href="/">
+                                    <Link href="/home">
+
                                         <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
-                                    </a>
+                                    </Link>
                                     <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={closeSidebar}></button>
                                 </div>
                             </div>
                             <hr className="featurette-divider line-menu"></hr>
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                             <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
+                            
+
                             {/* Dropdown do Sumário */}
                             <a 
                                 className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
@@ -191,9 +196,9 @@ export const Capitulos = () => {
                     {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
                     <div id='main-navbar-options-menu' style={{marginTop: 16}}>
                         <div className="logo-container d-flex align-items-center justify-content-between">
-                            <a href="/">
+                            <Link href="/home">
                                 <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
-                            </a>
+                            </Link>
                             <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="sidebar" aria-label="Close" onClick={closeSidebar}></button>
                         </div>
                         <hr className="featurette-divider line-menu"></hr>
@@ -220,9 +225,9 @@ export const Capitulos = () => {
                             <i className="fas fa-bars"></i>
                         </button>
                         {/* Logo Navbar */}
-                        <a className="navbar-brand" href="/">
+                        <Link className="navbar-brand" href="/home">
                             <Image src={Logo} width="100%" height={26} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
-                        </a>
+                        </Link>
                         {/* Código dos Itens Exibidos no Navbar */}
                         <ul className="navbar-nav ms-auto d-flex flex-row">
                             <li className="nav-item text-item-link">

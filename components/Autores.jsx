@@ -48,9 +48,9 @@ export const Autores = () => {
                             <i className="fas fa-bars"></i>
                         </button>
                         {/* Logo Navbar */}
-                        <a className="navbar-brand" href="/">
+                        <Link className="navbar-brand" href="/home">
                             <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
-                        </a>
+                        </Link>
                     </div>
                     {/* Input Search para tela menor que 992px */}
                     <div className="first-form-search">
@@ -77,9 +77,9 @@ export const Autores = () => {
                             <ul className="navbar-nav d-flex links-logo-ifembrapa flex-row mx-1">
                                 {/* Logo IF / Embrapa Dentro do Menu */}
                                 <li className="nav-item">
-                                    <a href="/">
+                                    <Link href="/home">
                                         <Image src={LogoIFEmbrapa} className='me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                             <button type="button" className="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -152,7 +152,7 @@ export const Autores = () => {
                         </div>
                         {/* Link para o Currículo dos Autores */}
                         <div className="action-card">
-                            <a target="_blank" href={item.attributes.url}>Currículo Lattes</a>
+                            <Link target="_blank" href={item.attributes.url}>Currículo Lattes</Link>
                         </div>
                     </div>
                     ))
