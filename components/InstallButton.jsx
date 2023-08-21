@@ -29,8 +29,8 @@ function InstallButton() {
 
         <>           
             {showInstallButton && (
-               <div id='btn-instalar' className='btn'>
-                <button onClick={handleInstallClick}>
+               <div>
+                <button id='btn-instalar' className='btn' onClick={handleInstallClick}>
                     Instalar
                 </button>
                 </div>
